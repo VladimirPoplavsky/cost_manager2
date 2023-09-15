@@ -1,11 +1,28 @@
 import React, { useState } from 'react';
-import { addCost } from '../idb';
+import expenseDB from '../idb';
+
+
+
+
+function writeToDatabase(data) {
+    expenseDB.then(async (db) => {
+        const tx = db.transaction('myExpenses', 'readwrite');
+        const store = tx.objectStore('myExpenses');
+
+        await store.add(data);
+
+        await tx.done;
+    });
+}
+
 
 export default function AddExpense() {
     const [sum, setSum] = useState('');
     const [category, setCategory] = useState('FOOD');
     const [description, setDescription] = useState('');
     const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
+
+    const data = {sum, category, description, date};
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -19,8 +36,6 @@ export default function AddExpense() {
         };
 
         try {
-            // await addCost(newCost); // Add the cost to IndexedDB
-            alert('Cost added successfully.');
             setSum('');
             setCategory('FOOD');
             setDescription('');
@@ -28,6 +43,7 @@ export default function AddExpense() {
         } catch (error) {
             console.error('Error adding cost:', error);
         }
+        writeToDatabase(data)
     };
 
     return (
