@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import expenseDB from '../idb';
-
-
+import idb from '../idb';
+import {Button, Form, Stack} from "react-bootstrap";
 
 
 function writeToDatabase(data) {
-    expenseDB.then(async (db) => {
+    idb.then(async (db) => {
         const tx = db.transaction('myExpenses', 'readwrite');
         const store = tx.objectStore('myExpenses');
 
@@ -47,51 +46,53 @@ export default function AddExpense() {
     };
 
     return (
-        <div>
-            <h2>Add New Cost</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Sum:</label>
-                    <input
-                        type="number"
-                        value={sum}
-                        onChange={(e) => setSum(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Category:</label>
-                    <select
-                        value={category}
-                        onChange={(e) => setCategory(e.target.value)}
-                    >
-                        <option value="FOOD">FOOD</option>
-                        <option value="HEALTH">HEALTH</option>
-                        <option value="EDUCATION">EDUCATION</option>
-                        <option value="TRAVEL">TRAVEL</option>
-                        <option value="HOUSING">HOUSING</option>
-                        <option value="OTHER">OTHER</option>
-                    </select>
-                </div>
-                <div>
-                    <label>Date:</label>
-                    <input
-                        type="date"
-                        value={date}
-                        onChange={(e) => setDate(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Description:</label>
-                    <input
-                        type="text"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                    />
-                </div>
-                <button type="submit">Add Cost</button>
-            </form>
-        </div>
+        <Stack direction={"horizontal"} gap={2} className={"mb-2"}>
+            <div>
+                <h2 className={"me-auto"}>Add New Expense</h2>
+                <Form onSubmit={handleSubmit}>
+                    <div>
+                        <label>Sum:</label>
+                        <input
+                            type="number"
+                            value={sum}
+                            onChange={(e) => setSum(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label>Category:</label>
+                        <select
+                            value={category}
+                            onChange={(e) => setCategory(e.target.value)}
+                        >
+                            <option value="FOOD">FOOD</option>
+                            <option value="HEALTH">HEALTH</option>
+                            <option value="EDUCATION">EDUCATION</option>
+                            <option value="TRAVEL">TRAVEL</option>
+                            <option value="HOUSING">HOUSING</option>
+                            <option value="OTHER">OTHER</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Date:</label>
+                        <input
+                            type="date"
+                            value={date}
+                            onChange={(e) => setDate(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label>Description:</label>
+                        <input
+                            type="text"
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                        />
+                    </div>
+                    <Button type="submit" variant={"primary"}>Add Cost</Button>
+                </Form>
+            </div>
+        </Stack>
     );
 }

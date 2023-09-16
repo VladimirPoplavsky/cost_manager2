@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import expenseDB from '../idb.js';
+import React, {useState} from 'react';
+import idb from '../idb.js';
+import ReportList from "./ReportList";
 
 function readFromDatabase() {
-    return expenseDB.then(async (db) => {
+    return idb.then(async (db) => {
         const tx = db.transaction('myExpenses', 'readonly');
         const store = tx.objectStore('myExpenses');
 
@@ -23,7 +24,7 @@ function DisplayData() {
     const dataToDisplay = [];
 
     for (let i = 0; i < data.length; i++) {
-        if(data[i].date.substring(0, 7) === selectedDate){
+        if (data[i].date.substring(0, 7) === selectedDate) {
             dataToDisplay.push(data[i]);
         }
     }
@@ -57,13 +58,7 @@ function DisplayData() {
                 Show Report
             </button>
             {showReport && ( // Display data only if showReport is true
-                <ul>
-                    {dataToDisplay.map((item) => (
-                        <li key={item.id}>
-                            {item.sum}, {item.date}, {item.category}, {item.description}
-                        </li>
-                    ))}
-                </ul>
+                <ReportList dataToDisplay={dataToDisplay} moreData={[1, 2, 3, 4, 5]}></ReportList>
             )}
         </div>
     );
