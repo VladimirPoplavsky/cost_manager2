@@ -1,55 +1,73 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {readFromDatabase} from '../idb.js';
-import ReportList from "./ReportList";
+import ReportList from './ReportList';
+import {Button, Col, Container, Form, Row} from 'react-bootstrap';
 
-
-function DisplayData() {
+function ShowReport() {
     const [data, setData] = useState([]);
-    // State to store the selected year and month
     const [selectedDate, setSelectedDate] = useState('');
-    const [showReport, setShowReport] = useState(false); // Track whether the button is clicked
+    const [periodSelected, setPeriodSelected] = useState(false);
 
     const dataToDisplay = [];
 
-    for (let i = 0; i < data.length; i++) {
-        if (data[i].date.substring(0, 7) === selectedDate) {
+    // When page is loaded and specific month and year not selected we will show all expenses from database
+    if (periodSelected === false) {
+        readFromDatabase().then((result) => {
+            setData(result);
+        });
+        for (let i = 0; i < data.length; i++) {
             dataToDisplay.push(data[i]);
+        }
+    } else {
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].date.substring(0, 7) === selectedDate) {
+                dataToDisplay.push(data[i]);
+            }
         }
     }
 
-    // Event handler for the input change
     const handleDateChange = (event) => {
         const selectedValue = event.target.value;
         setSelectedDate(selectedValue);
     };
 
-    // Function to handle the "Show Report" button click
+    // when user selects period to report - set setPeriodSelected = true and display only specific month report
     const handleShowReport = () => {
         readFromDatabase().then((result) => {
             setData(result);
-            setShowReport(true); // Set showReport to true when the button is clicked
+            setPeriodSelected(true);
         });
     };
 
     return (
-        <div>
-            <h2>Create Report:</h2>
-            <label htmlFor="monthreport">Select period:</label>
-            <input
-                type="month"
-                id="monthreport"
-                name="report"
-                value={selectedDate}
-                onChange={handleDateChange}
-            />
-            <button type="button" onClick={handleShowReport}>
-                Show Report
-            </button>
-            {showReport && ( // Display data only if showReport is true
-                <ReportList dataToDisplay={dataToDisplay} moreData={[1, 2, 3, 4, 5]}></ReportList>
-            )}
-        </div>
+        <Container>
+            <Row className={'justify-content-center'}>
+                <Col md={6}>
+                    <h2 className={'text-center'}>Expenses:</h2>
+                    <Form.Group className={'my-2'} controlId='monthreport'>
+                        <Form.Label>Select period:</Form.Label>
+                        <Form.Control
+                            type='month'
+                            value={selectedDate}
+                            onChange={handleDateChange}
+                        />
+                    </Form.Group>
+                    <div className={"text-center mb-4"}>
+                        <Button
+                            type='button'
+                            variant='info'
+                            onClick={handleShowReport}
+                        >
+                            Apply
+                        </Button>
+                    </div>
+                    <ReportList
+                        dataToDisplay={dataToDisplay}
+                    ></ReportList>
+                </Col>
+            </Row>
+        </Container>
     );
 }
 
-export default DisplayData;
+export default ShowReport;
