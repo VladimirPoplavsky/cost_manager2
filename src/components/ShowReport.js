@@ -1,7 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {readFromDatabase} from '../idb.js';
 import ReportList from './ReportList';
 import {Button, Col, Container, Form, Row} from 'react-bootstrap';
+import TotalExpenses from "./TotalExpenses";
 
 function ShowReport() {
     const [data, setData] = useState([]);
@@ -44,6 +45,7 @@ function ShowReport() {
             <Row className={'justify-content-center'}>
                 <Col md={6}>
                     <h2 className={'text-center'}>Expenses:</h2>
+                    <TotalExpenses records={data}></TotalExpenses>
                     <Form.Group className={'my-2'} controlId='monthreport'>
                         <Form.Label>Select period:</Form.Label>
                         <Form.Control

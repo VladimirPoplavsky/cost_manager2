@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { writeToDatabase } from '../idb';
-import { Button, Form, Stack, Col, Container, Row } from 'react-bootstrap';
+import { Button, Form, Col, Container, Row } from 'react-bootstrap';
 import { CATEGORIES } from '../Consts/Categories';
 
 export default function AddExpense() {
@@ -72,7 +72,7 @@ export default function AddExpense() {
                                 />
                             </Form.Group>
                             <div className="text-center">
-                                <Button variant={"info"}>
+                                <Button variant={"info"} type={"submit"}>
                                     Add Cost
                                 </Button>
                             </div>
