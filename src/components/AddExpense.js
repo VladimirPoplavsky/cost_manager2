@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-import idb from '../idb';
+import {writeToDatabase} from '../idb';
 import {Button, Form, Stack} from "react-bootstrap";
 
 
-function writeToDatabase(data) {
-    idb.then(async (db) => {
-        const tx = db.transaction('myExpenses', 'readwrite');
-        const store = tx.objectStore('myExpenses');
-
-        await store.add(data);
-
-        await tx.done;
-    });
-}
+// function writeToDatabase(data) {
+//     idb.then(async (db) => {
+//         const tx = db.transaction('myExpenses', 'readwrite');
+//         const store = tx.objectStore('myExpenses');
+//
+//         await store.add(data);
+//
+//         await tx.done;
+//     });
+// }
 
 
 export default function AddExpense() {

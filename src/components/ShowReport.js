@@ -1,19 +1,7 @@
 import React, {useState} from 'react';
-import idb from '../idb.js';
+import {readFromDatabase} from '../idb.js';
 import ReportList from "./ReportList";
 
-function readFromDatabase() {
-    return idb.then(async (db) => {
-        const tx = db.transaction('myExpenses', 'readonly');
-        const store = tx.objectStore('myExpenses');
-
-        // Retrieve data from the store
-        const data = await store.getAll();
-
-        await tx.done;
-        return data;
-    });
-}
 
 function DisplayData() {
     const [data, setData] = useState([]);
