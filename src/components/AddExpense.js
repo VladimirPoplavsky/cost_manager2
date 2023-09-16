@@ -1,18 +1,7 @@
 import React, { useState } from 'react';
 import {writeToDatabase} from '../idb';
 import {Button, Form, Stack} from "react-bootstrap";
-
-
-// function writeToDatabase(data) {
-//     idb.then(async (db) => {
-//         const tx = db.transaction('myExpenses', 'readwrite');
-//         const store = tx.objectStore('myExpenses');
-//
-//         await store.add(data);
-//
-//         await tx.done;
-//     });
-// }
+import {CATEGORIES} from "../Consts/Categories";
 
 
 export default function AddExpense() {
@@ -65,12 +54,11 @@ export default function AddExpense() {
                             value={category}
                             onChange={(e) => setCategory(e.target.value)}
                         >
-                            <option value="FOOD">FOOD</option>
-                            <option value="HEALTH">HEALTH</option>
-                            <option value="EDUCATION">EDUCATION</option>
-                            <option value="TRAVEL">TRAVEL</option>
-                            <option value="HOUSING">HOUSING</option>
-                            <option value="OTHER">OTHER</option>
+                            {CATEGORIES.map((categoryOption) => (
+                                <option key={categoryOption} value={categoryOption}>
+                                    {categoryOption}
+                                </option>
+                            ))}
                         </select>
                     </div>
                     <div>
