@@ -10,7 +10,7 @@ export default function ReportList(props) {
                     {props.dataToDisplay.map((item) => (
                         <ul key={item.id}>
                             <strong>Date:</strong> {item.date}<br />
-                            <strong>Sum:</strong> ${item.sum}<br />
+                            <strong>Sum:</strong> ₪{item.sum}<br />
                             <strong>Category:</strong> {item.category}<br />
                             <strong>Description:</strong> {item.description}
                             <hr/>
