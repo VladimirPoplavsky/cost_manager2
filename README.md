@@ -27,7 +27,7 @@ Simple expence management tool - final project of the course frontend developmen
 > **npm install**
 4. Start the App:
 > **npm start**
-5. Runs the app in the development mode.\
+5. Runs the app in the development mode.
 > **Open [http://localhost:3000](http://localhost:3000) to view it in your browser.**
 
 The page will reload when you make changes.\
