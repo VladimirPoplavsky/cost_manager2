@@ -1,6 +1,17 @@
-# Getting Started with Create React App
+# Expense Management web application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Simple expence management tool - final project of the course frontend development of HIT (Holon Institute of Technology)
+
+## Running App Demo
+https://clinquant-cactus-e6a886.netlify.app/
+![image](https://github.com/VladimirPoplavsky/cost_manager2/assets/34675746/441585c4-4a52-44e5-afa1-1aad76cbc597)
+
+
+## Features
+- Add expense (select category, date, add description)
+- See total expences
+- Create detailed report per month and year.
+
 
 ## Available Scripts
 
