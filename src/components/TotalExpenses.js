@@ -8,6 +8,10 @@ function TotalExpenses(props) {
     const target = useRef(null);
     const [total, setTotal] = useState(0);
 
+    function hideTotal(){
+        setShow(show);
+    }
+
     const handleTotal = () => {
         setShow(!show);
         let sum = 0;
@@ -15,6 +19,9 @@ function TotalExpenses(props) {
             sum += parseFloat(props.records[i].sum);
         }
         setTotal(sum);
+
+        // hide total expenses after 2 seconds
+        setTimeout(hideTotal, 2000);
     }
 
 
