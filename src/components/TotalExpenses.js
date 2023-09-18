@@ -1,3 +1,15 @@
+/*
+----- Developers info -----
+Dev1 name: Vladimir Poplavsky
+Dev1 ID: 336137468
+
+Dev2 name: Sergey Gershov
+Dev2 ID: 327232450
+
+Dev3 name: Ilan Yashan
+Dev3 ID: 201211588
+ */
+
 import {useState, useRef} from 'react';
 import Button from 'react-bootstrap/Button';
 import Overlay from 'react-bootstrap/Overlay';
@@ -8,9 +20,9 @@ function TotalExpenses(props) {
     const target = useRef(null);
     const [total, setTotal] = useState(0);
 
-    function hideTotal(){
+    const hideTotal = () => {
         setShow(show);
-    }
+    };
 
     const handleTotal = () => {
         setShow(!show);
@@ -27,10 +39,10 @@ function TotalExpenses(props) {
 
     return (
         <>
-            <Button variant="warning" ref={target} onClick={handleTotal}>
+            <Button variant={"warning"} ref={target} onClick={handleTotal}>
                 Click to see total expenses
             </Button>
-            <Overlay target={target.current} show={show} placement="right">
+            <Overlay target={target.current} show={show} placement={"right"}>
                 {({
                       placement: _placement,
                       arrowProps: _arrowProps,
@@ -50,7 +62,7 @@ function TotalExpenses(props) {
                             ...props.style,
                         }}
                     >
-                        {total}
+                        ₪{total}
                     </div>
                 )}
             </Overlay>
